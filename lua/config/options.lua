@@ -31,3 +31,6 @@ local options = {
 for k,v in pairs(options) do
   vim.opt[k] = v
 end
+
+-- disable autoformat
+vim.g.autoformat = false

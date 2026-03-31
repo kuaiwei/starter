@@ -1,7 +1,6 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 require("config.lazy")
 
--- 自动检查远端仓库更新
 local function check_remote_update()
   local config_dir = vim.fn.stdpath("config")
   local git_dir = config_dir .. "/.git"
@@ -11,7 +10,7 @@ local function check_remote_update()
     return
   end
 
-  -- 获取当前分支
+  -- retrive current branch
   local branch = vim.fn.system("git -C " .. vim.fn.shellescape(config_dir) .. " rev-parse --abbrev-ref HEAD"):gsub("\n", "")
   if branch == "" then
     return
@@ -20,7 +19,7 @@ local function check_remote_update()
   -- fetch 远端更新
   vim.fn.system("git -C " .. vim.fn.shellescape(config_dir) .. " fetch")
 
-  -- 检查是否有更新
+  -- check update
   local local_head = vim.fn.system("git -C " .. vim.fn.shellescape(config_dir) .. " rev-parse HEAD"):gsub("\n", "")
   local remote_head = vim.fn.system("git -C " .. vim.fn.shellescape(config_dir) .. " rev-parse @{u} 2>/dev/null"):gsub("\n", "")
 
